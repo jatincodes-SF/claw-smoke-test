@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise AI 2026 Strategy Canvas</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #131b2e;
+      --card-border: #233252;
+      --card-hover: #1c2742;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #a855f7;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #1e1b4b 0%, var(--bg) 60%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .instruction {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      opacity: 0.85;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    .card:hover, .card:focus-visible {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.2);
+      background: var(--card-hover);
+      outline: none;
+    }
+
+    .card-pillar {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-cyan { color: var(--accent-cyan); }
+    .pillar-purple { color: var(--accent-purple); }
+    .pillar-emerald { color: var(--accent-emerald); }
+    .pillar-amber { color: var(--accent-amber); }
+    .pillar-rose { color: var(--accent-rose); }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+
+    .card-footer span.action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 10, 18, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 50;
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: #11192d;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 620px;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      position: relative;
+      animation: modalSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalSlide {
+      from {
+        transform: translateY(20px) scale(0.97);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .modal-header {
+      margin-bottom: 1.25rem;
+      padding-right: 2rem;
+    }
+
+    .modal-pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-summary {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-section {
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-section-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .modal-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+
+    .modal-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+    }
+
+    .modal-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .metric-card {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .metric-val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">Architecture Blueprint</div>
+      <h1>Enterprise AI 2026 Strategy Canvas</h1>
+      <p class="subtitle">A forward-looking operating model aligning autonomous agent swarms, governance, and enterprise data mesh.</p>
+      <p class="instruction">💡 Click any card below to explore architecture details, key initiatives, and 2026 targets.</p>
+    </header>
+
+    <div class="grid" id="cardGrid">
+      <!-- Cards rendered via JS -->
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button class="close-btn" id="closeBtn" aria-label="Close dialog">&times;</button>
+      <div class="modal-header">
+        <div id="modalPillar" class="modal-pill"></div>
+        <h2 id="modalTitle" class="modal-title"></h2>
+      </div>
+      <p id="modalSummary" class="modal-summary"></p>
+      
+      <div class="modal-section">
+        <div class="modal-section-title">Core Initiatives & Capabilities</div>
+        <ul id="modalInitiatives" class="modal-list"></ul>
+      </div>
+
+      <div class="modal-metrics" id="modalMetrics">
+        <!-- Rendered metrics -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvasData = [
+      {
+        id: "autonomous-agents",
+        pillar: "Autonomy",
+        pillarClass: "pillar-cyan",
+        title: "Autonomous Agent Orchestration",
+        summary: "Self-coordinating agent teams capable of complex, multi-turn reasoning and tool invocation across cross-functional enterprise workflows.",
+        initiatives: [
+          "Dynamic swarm consensus and leader election protocols",
+          "Hierarchical supervisor trees with budget and SLA guardrails",
+          "Automated self-healing execution loops and fallback policies"
+        ],
+        metrics: [
+          { val: "70%", label: "Routine Ops Automated" },
+          { val: "<1.2s", label: "Agent Task Hand-off Latency" }
+        ]
+      },
+      {
+        id: "governance-guardrails",
+        pillar: "Trust & Safety",
+        pillarClass: "pillar-rose",
+        title: "Real-time AI Guardrails & Alignment",
+        summary: "Zero-trust policy enforcement, automated hallucination mitigation, and strict role-based access for non-deterministic model outputs.",
+        initiatives: [
+          "Deterministic boundary checks for output compliance (PII/SOC2/HIPAA)",
+          "Automated red-teaming simulations on fine-tuned weights",
+          "Cryptographic watermarking and lineage provenance on generated media"
+        ],
+        metrics: [
+          { val: "99.98%", label: "Compliance Filter Precision" },
+          { val: "0 min", label: "Audit Trace Turnaround" }
+        ]
+      },
+      {
+        id: "enterprise-rag",
+        pillar: "Knowledge Mesh",
+        pillarClass: "pillar-purple",
+        title: "Unified Enterprise Knowledge Fabric",
+        summary: "Unified multi-modal vector meshes connecting unstructured document siloes, structured datalakes, and live streaming metrics.",
+        initiatives: [
+          "Hybrid sparse/dense vector search with graph-relational reasoning",
+          "Sub-minute delta indexing across legacy ERP and CRM systems",
+          "Context-aware semantic caching reducing redundant LLM inference"
+        ],
+        metrics: [
+          { val: "10x", label: "Retrieval Relevance Improvement" },
+          { val: "-45%", label: "Embedding Cache Redundancy" }
+        ]
+      },
+      {
+        id: "slm-edge",
+        pillar: "Compute & Edge",
+        pillarClass: "pillar-emerald",
+        title: "Hybrid SLM & On-Prem Inference",
+        summary: "Cost-optimized architecture shifting away from mega-LLMs to task-specialized small models running on edge accelerators.",
+        initiatives: [
+          "4-bit quantized task-distilled models (3B-8B parameter range)",
+          "Sub-millisecond local inference on branch and edge devices",
+          "Elastic spillover orchestration to frontier cloud models"
+        ],
+        metrics: [
+          { val: "-60%", label: "Inference Cost per Token" },
+          { val: "<30ms", label: "On-Premises Edge Latency" }
+        ]
+      },
+      {
+        id: "eval-observability",
+        pillar: "Operations",
+        pillarClass: "pillar-amber",
+        title: "Continuous Evals & LLMOps",
+        summary: "Continuous automated benchmarking, drift detection, and synthetic evaluation pipelines tracking drift across production LLMs.",
+        initiatives: [
+          "Real-time token drift & semantic divergence telemetry",
+          "Automated regression evals triggered on model checkpoint releases",
+          "Shadow routing and live A/B benchmarking across model providers"
+        ],
+        metrics: [
+          { val: "24/7", label: "Automated Regression Evals" },
+          { val: "100%", label: "Inference Traceability" }
+        ]
+      },
+      {
+        id: "human-in-loop",
+        pillar: "Human Agency",
+        pillarClass: "pillar-cyan",
+        title: "Adaptive Human-in-the-Loop",
+        summary: "Frictionless escalation paths empowering human operators with context-rich review tools when agent confidence dips below thresholds.",
+        initiatives: [
+          "Confidence-scored escalation triggers for critical workflows",
+          "Operator-friendly diff views and action rollback controls",
+          "Continuous reinforcement learning from human corrections (RLHF)"
+        ],
+        metrics: [
+          { val: "85%", label: "First-Pass Human Acceptance" },
+          { val: "3x", label: "Reviewer Throughput Boost" }
+        ]
+      }
+    ];
+
+    const cardGrid = document.getElementById("cardGrid");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const closeBtn = document.getElementById("closeBtn");
+
+    const modalPillar = document.getElementById("modalPillar");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSummary = document.getElementById("modalSummary");
+    const modalInitiatives = document.getElementById("modalInitiatives");
+    const modalMetrics = document.getElementById("modalMetrics");
+
+    // Render cards
+    canvasData.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", `View details for ${item.title}`);
+
+      card.innerHTML = `
+        <span class="card-pillar ${item.pillarClass}">${item.pillar}</span>
+        <h2>${item.title}</h2>
+        <p>${item.summary}</p>
+        <div class="card-footer">
+          <span>Explore details</span>
+          <span class="action">View &rarr;</span>
+        </div>
+      `;
+
+      card.addEventListener("click", () => openModal(item));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal(item);
+        }
+      });
+
+      cardGrid.appendChild(card);
+    });
+
+    function openModal(item) {
+      modalPillar.textContent = item.pillar;
+      modalPillar.className = `modal-pill ${item.pillarClass}`;
+      modalTitle.textContent = item.title;
+      modalSummary.textContent = item.summary;
+
+      // Initiatives
+      modalInitiatives.innerHTML = item.initiatives
+        .map(i => `<li>${i}</li>`)
+        .join("");
+
+      // Metrics
+      modalMetrics.innerHTML = item.metrics
+        .map(m => `
+          <div class="metric-card">
+            <div class="metric-val">${m.val}</div>
+            <div class="metric-label">${m.label}</div>
+          </div>
+        `)
+        .join("");
+
+      modalBackdrop.classList.add("open");
+      closeBtn.focus();
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("open");
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modalBackdrop.classList.contains("open")) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
