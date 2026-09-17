@@ -3,320 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engagement Internal Kickoff - Initiation Phase | SourceFuse</title>
+  <title>Engagement Internal Kickoff - SourceFuse Initiation Phase</title>
   <style>
     :root {
-      --primary: #0F172A;
-      --accent: #2563EB;
-      --accent-light: #EFF6FF;
-      --text: #1E293B;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --card-bg: #FFFFFF;
-      --bg: #F8FAFC;
-      --warning-bg: #FEF3C7;
-      --warning-border: #F59E0B;
-      --warning-text: #92400E;
-      --badge-r: #EF4444;
-      --badge-a: #F59E0B;
-      --badge-c: #3B82F6;
-      --badge-i: #10B981;
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --secondary: #0f172a;
+      --accent: #f59e0b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text: #334155;
+      --text-dark: #0f172a;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
       line-height: 1.5;
-      padding: 32px 16px;
+      margin: 0;
+      padding: 24px;
     }
     .container {
       max-width: 900px;
       margin: 0 auto;
       background: var(--card-bg);
-      border: 1px solid var(--border);
       border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      padding: 32px;
+      border: 1px solid var(--border);
     }
     header {
-      background: var(--primary);
-      color: #FFFFFF;
-      padding: 24px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; }
-    header .badge {
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .content { padding: 32px; }
-    .section-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin: 24px 0 12px 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 2px solid var(--accent-light);
-      padding-bottom: 6px;
-    }
-    .section-title:first-of-type { margin-top: 0; }
-    p { margin-bottom: 12px; font-size: 0.95rem; }
-    .metadata-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 16px;
       margin-bottom: 24px;
-      background: var(--accent-light);
-      padding: 16px;
-      border-radius: 6px;
     }
-    .metadata-item label {
-      display: block;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-    .metadata-item span {
-      font-size: 0.95rem;
-      font-weight: 600;
+    h1 {
+      margin: 0 0 8px 0;
       color: var(--primary);
+      font-size: 24px;
+    }
+    .subtitle {
+      color: var(--text);
+      font-size: 14px;
+      margin: 0;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      background: #eff6ff;
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+    .meta-item strong {
+      color: var(--primary);
+      display: block;
+    }
+    h2 {
+      font-size: 16px;
+      color: var(--primary);
+      border-left: 4px solid var(--primary-light);
+      padding-left: 8px;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 24px;
-      font-size: 0.9rem;
+      margin-bottom: 20px;
+      font-size: 13px;
     }
     th, td {
       border: 1px solid var(--border);
-      padding: 10px 14px;
+      padding: 8px 12px;
       text-align: left;
     }
     th {
-      background: #F1F5F9;
+      background-color: #f1f5f9;
+      color: var(--text-dark);
       font-weight: 600;
-      color: var(--primary);
     }
-    tbody tr:nth-child(even) { background: #FAFAFA; }
-    .raci-tag {
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    .badge {
       display: inline-block;
-      padding: 2px 8px;
+      padding: 2px 6px;
       border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.75rem;
-      color: #fff;
-      text-align: center;
-      min-width: 24px;
+      font-size: 11px;
+      font-weight: bold;
     }
-    .raci-r { background: var(--badge-r); }
-    .raci-a { background: var(--badge-a); }
-    .raci-c { background: var(--badge-c); }
-    .raci-i { background: var(--badge-i); }
-    .legend {
-      display: flex;
-      gap: 16px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 16px;
-      flex-wrap: wrap;
+    .badge-r { background: #fee2e2; color: #991b1b; }
+    .badge-a { background: #fef3c7; color: #92400e; }
+    .badge-c { background: #e0e7ff; color: #3730a3; }
+    .badge-i { background: #f3f4f6; color: #4b5563; }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 13.5px;
     }
-    .legend-item { display: flex; align-items: center; gap: 6px; }
-    .callout {
-      background: var(--warning-bg);
-      border-left: 4px solid var(--warning-border);
-      padding: 14px 18px;
-      border-radius: 4px;
-      margin-bottom: 24px;
-      font-size: 0.9rem;
-      color: var(--warning-text);
-    }
-    .callout h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
+    li {
       margin-bottom: 6px;
     }
-    .callout ul {
-      margin-left: 20px;
-    }
-    .callout li {
-      margin-bottom: 4px;
-    }
-    .next-steps {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 16px;
-    }
-    .next-steps ol {
-      margin-left: 20px;
-      font-size: 0.9rem;
-    }
-    .next-steps li {
-      margin-bottom: 6px;
-    }
-    footer {
+    .footer {
+      margin-top: 28px;
+      padding-top: 12px;
       border-top: 1px solid var(--border);
-      padding: 16px 32px;
+      font-size: 12px;
+      color: #64748b;
       text-align: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-      background: #F8FAFC;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>Engagement Kickoff — Initiation Phase</h1>
-        <div style="font-size: 0.85rem; opacity: 0.9;">SourceFuse Client Engagement Delivery</div>
-      </div>
-      <div class="badge">Initiation Stage Gate</div>
-    </header>
 
-    <div class="content">
-      <div class="metadata-grid">
-        <div class="metadata-item">
-          <label>Phase</label>
-          <span>Initiation &amp; Discovery</span>
-        </div>
-        <div class="metadata-item">
-          <label>Target Stage Gate</label>
-          <span>Initiation Review &amp; Sign-off</span>
-        </div>
-        <div class="metadata-item">
-          <label>Lead PM</label>
-          <span>Engagement PM</span>
-        </div>
-        <div class="metadata-item">
-          <label>Upcoming Milestone</label>
-          <span>Stakeholder Sync (Tomorrow AM)</span>
-        </div>
-      </div>
+<div class="container">
+  <header>
+    <h1>SourceFuse Client Engagement Kickoff</h1>
+    <p class="subtitle">Internal Team Briefing &amp; Initiation Phase Execution Plan</p>
+  </header>
 
-      <h2 class="section-title">1. Engagement Kickoff &amp; Objectives</h2>
-      <p>
-        Team, we are officially kicking off the <strong>Initiation Phase</strong> for our new client engagement. The objective of this phase is to align on scope boundaries, governance, architectural foundations, technical feasibility, and team readiness before proceeding into active sprint execution.
-      </p>
-
-      <h2 class="section-title">2. Mandatory Initiation Deliverables &amp; RACI Ownership</h2>
-      <div class="legend">
-        <div class="legend-item"><span class="raci-tag raci-r">R</span> Responsible (executes)</div>
-        <div class="legend-item"><span class="raci-tag raci-a">A</span> Accountable (final sign-off)</div>
-        <div class="legend-item"><span class="raci-tag raci-c">C</span> Consulted (two-way input)</div>
-        <div class="legend-item"><span class="raci-tag raci-i">I</span> Informed (kept updated)</div>
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Deliverable / Artifact</th>
-            <th>Description &amp; Key Requirements</th>
-            <th>PM</th>
-            <th>Tech Lead / Arch</th>
-            <th>Engineering / QA</th>
-            <th>Delivery Head / Stakeholder</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Project Charter &amp; Scope Document</strong></td>
-            <td>Defines project objectives, success criteria, milestones, high-level budget, and out-of-scope items.</td>
-            <td><span class="raci-tag raci-r">R</span> <span class="raci-tag raci-a">A</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-i">I</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-          </tr>
-          <tr>
-            <td><strong>Stakeholder Register &amp; Comm Plan</strong></td>
-            <td>Identifies all key client &amp; internal stakeholders, escalation matrix, cadence, and reporting formats.</td>
-            <td><span class="raci-tag raci-r">R</span> <span class="raci-tag raci-a">A</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-i">I</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-          </tr>
-          <tr>
-            <td><strong>High-Level Architecture &amp; Tech Stack</strong></td>
-            <td>Architectural blueprint, cloud services (AWS), integrations, security considerations, and non-functionals.</td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-r">R</span> <span class="raci-tag raci-a">A</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-i">I</span></td>
-          </tr>
-          <tr>
-            <td><strong>Initial Risk &amp; Assumption Log (RAID)</strong></td>
-            <td>Captures risks, assumptions, issues, and dependencies identified during pre-sales and onboarding.</td>
-            <td><span class="raci-tag raci-r">R</span> <span class="raci-tag raci-a">A</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-i">I</span></td>
-          </tr>
-          <tr>
-            <td><strong>Environment &amp; Access Readiness Checklist</strong></td>
-            <td>Repositories, cloud sandbox accounts, VPN/SSO access, Jira/Confluence boards, and CI/CD pipelines.</td>
-            <td><span class="raci-tag raci-a">A</span></td>
-            <td><span class="raci-tag raci-r">R</span></td>
-            <td><span class="raci-tag raci-r">R</span></td>
-            <td><span class="raci-tag raci-i">I</span></td>
-          </tr>
-          <tr>
-            <td><strong>Initial Product Backlog &amp; User Journeys</strong></td>
-            <td>Initial epics, user stories, discovery backlog grooming, and acceptance criteria for Phase 1.</td>
-            <td><span class="raci-tag raci-r">R</span> <span class="raci-tag raci-a">A</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-i">I</span></td>
-          </tr>
-          <tr>
-            <td><strong>Ways of Working &amp; Team Norms</strong></td>
-            <td>Agile ceremonies schedule, DoD/DoR, PR review SLAs, branch strategy, and release cadence.</td>
-            <td><span class="raci-tag raci-r">R</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-c">C</span></td>
-            <td><span class="raci-tag raci-a">A</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="callout">
-        <h4>Critical Open Questions for Tomorrow's Stakeholder Sync</h4>
-        <ul>
-          <li><strong>Environment &amp; Infrastructure Access:</strong> Do we have dedicated client cloud sandbox environments and VPN/SSO credentials ready, or what is the lead time for provisioning?</li>
-          <li><strong>Client Decision-Makers &amp; Sign-off Velocity:</strong> Who holds final approval for scope trade-offs and architectural sign-offs, and what is the expected SLA for sign-off turnaround?</li>
-          <li><strong>Third-Party Dependencies &amp; Integrations:</strong> Are third-party vendor APIs, sandboxes, and documentation fully accessible and rate-limit cleared for development?</li>
-          <li><strong>Target Timelines &amp; Budget Milestones:</strong> Are there fixed hard deadlines (e.g. board demos, compliance audit dates, conference releases) that dictate scope prioritization?</li>
-          <li><strong>Data Compliance &amp; Security Protocols:</strong> Are there specific compliance regimes (e.g., HIPAA, SOC2, GDPR) requiring client-mandated code scanners, data masking, or audit trails?</li>
-        </ul>
-      </div>
-
-      <h2 class="section-title">3. Immediate Action Items &amp; Next Steps</h2>
-      <div class="next-steps">
-        <ol>
-          <li><strong>Team Sync:</strong> Final review of open questions and roles before client call (15 mins prior to stakeholder sync).</li>
-          <li><strong>Stakeholder Call Execution:</strong> Lead the discussion around Charter, RAID log, and Access timelines.</li>
-          <li><strong>Action Item Dispatch:</strong> Share formal meeting minutes, updated RAID log, and finalized environment access matrix by EOD tomorrow.</li>
-        </ol>
-      </div>
-    </div>
-
-    <footer>
-      SourceFuse Internal PM Kickoff Briefing &bull; Initiation Stage Gate &bull; Confidential
-    </footer>
+  <div class="meta-grid">
+    <div class="meta-item"><strong>Current Phase:</strong> Initiation &amp; Onboarding</div>
+    <div class="meta-item"><strong>Upcoming Milestone:</strong> Client Stakeholder Sync (Tomorrow AM)</div>
+    <div class="meta-item"><strong>Lead PM:</strong> Project Management Office</div>
   </div>
+
+  <h2>1. Engagement Overview &amp; Objectives</h2>
+  <p style="font-size: 13.5px; margin: 0 0 16px 0;">
+    Welcome team! We are officially initiating our new client engagement. The Initiation phase establishes governance, confirms contractual scope against technical feasibility, aligns communications rhythms, and secures team access so we can transition smoothly into sprint execution.
+  </p>
+
+  <h2>2. Mandatory Initiation Deliverables &amp; RACI Ownership</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Mandatory Deliverable</th>
+        <th>Description / Purpose</th>
+        <th>R</th>
+        <th>A</th>
+        <th>C</th>
+        <th>I</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Project Charter / Initiation Deck</strong></td>
+        <td>Defines project objectives, success criteria, milestones, governance structure, and scope boundaries.</td>
+        <td><span class="badge badge-r">PM</span></td>
+        <td><span class="badge badge-a">PM</span></td>
+        <td>Tech Lead, Arch</td>
+        <td>Client Core Team</td>
+      </tr>
+      <tr>
+        <td><strong>Stakeholder Register &amp; Comm Plan</strong></td>
+        <td>Identifies all stakeholders, roles, reporting cadence (daily/weekly/monthly), escalation hierarchy, and channels.</td>
+        <td><span class="badge badge-r">PM</span></td>
+        <td><span class="badge badge-a">PM</span></td>
+        <td>Account Exec</td>
+        <td>Whole Team</td>
+      </tr>
+      <tr>
+        <td><strong>Technical Architecture &amp; Environment Assessment</strong></td>
+        <td>High-level architecture review, cloud infrastructure setup, repository standards, and tech stack validation.</td>
+        <td><span class="badge badge-r">Tech Lead / Arch</span></td>
+        <td><span class="badge badge-a">Tech Lead</span></td>
+        <td>PM, DevOps Lead</td>
+        <td>Client Tech Lead</td>
+      </tr>
+      <tr>
+        <td><strong>Environment &amp; Access Matrix</strong></td>
+        <td>Catalog of required accesses (repos, cloud accounts, VPN, Jira/Slack/Confluence, 3rd party APIs) and clearance status.</td>
+        <td><span class="badge badge-r">PM / DevOps</span></td>
+        <td><span class="badge badge-a">PM</span></td>
+        <td>Tech Lead</td>
+        <td>Client IT Admin</td>
+      </tr>
+      <tr>
+        <td><strong>Initial Risk &amp; Assumption Log (RAID)</strong></td>
+        <td>Baseline log capturing initial project risks, technical assumptions, dependencies, and mitigation strategies.</td>
+        <td><span class="badge badge-r">PM</span></td>
+        <td><span class="badge badge-a">PM</span></td>
+        <td>Dev Team, Tech Lead</td>
+        <td>Client Sponsor</td>
+      </tr>
+      <tr>
+        <td><strong>Working Agreement &amp; Definition of Done (DoD)</strong></td>
+        <td>Engineering team cadence, PR guidelines, code review policies, QA standards, and definition of sprint ready/done.</td>
+        <td><span class="badge badge-r">Team / QA</span></td>
+        <td><span class="badge badge-a">Tech Lead</span></td>
+        <td>PM</td>
+        <td>Client Stakeholders</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size: 11px; color: #64748b; margin-top: -12px;">* RACI Legend: [R] Responsible (executes), [A] Accountable (approves/owns), [C] Consulted (inputs), [I] Informed (updated).</p>
+
+  <h2>3. Immediate Open Questions for Tomorrow's Stakeholder Sync</h2>
+  <ul>
+    <li><strong>Client Approvals &amp; Sign-off:</strong> Who holds the single point of sign-off authority for scope modifications and sprint deliverable acceptances?</li>
+    <li><strong>Infrastructure &amp; Access Provisioning:</strong> Are cloud accounts (AWS/Azure/GCP), code repositories, and identity providers pre-provisioned, or do we follow client ticket SLAs?</li>
+    <li><strong>Governance &amp; Cadence:</strong> What is the preferred recurring schedule for Weekly Status Reports, Sprint Reviews, and Executive SteerCo sessions?</li>
+    <li><strong>Third-Party Dependencies &amp; Integrations:</strong> Are any dependent internal APIs or third-party vendor services currently locked behind specialized VPNs or awaiting contract clearance?</li>
+  </ul>
+
+  <h2>4. Next Steps &amp; Action Items for the Team</h2>
+  <ul>
+    <li><strong>PM:</strong> Finalize Initiation Deck and Stakeholder Register prior to tomorrow morning's sync.</li>
+    <li><strong>Tech Lead / DevOps:</strong> Verify baseline access requirements checklist and submit prerequisite request forms.</li>
+    <li><strong>Team:</strong> Review Statement of Work (SOW) key deliverables and prepare questions for tomorrow's briefing.</li>
+  </ul>
+
+  <div class="footer">
+    SourceFuse Engagement Initiation &bull; Confidential &bull; Generated for Internal Project Team Alignment
+  </div>
+</div>
+
 </body>
 </html>
