@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise AI in 2026 - Demo Canvas</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      max-width: 800px;
+    }
+    h1 {
+      font-size: 28px;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      color: #94a3b8;
+      font-size: 15px;
+    }
+    .canvas-container {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    canvas {
+      display: block;
+      background: #0b1120;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .legend {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Enterprise AI Landscape in 2026</h1>
+    <p class="subtitle">Interactive visual architecture showing how global enterprises deploy, orchestrate, and leverage autonomous AI systems at scale.</p>
+  </header>
+
+  <div class="canvas-container">
+    <canvas id="aiCanvas" width="960" height="580"></canvas>
+    <div class="legend">
+      <div class="legend-item"><span class="dot" style="background:#38bdf8"></span> Agentic Orchestration</div>
+      <div class="legend-item"><span class="dot" style="background:#a855f7"></span> Enterprise Data & RAG Mesh</div>
+      <div class="legend-item"><span class="dot" style="background:#10b981"></span> Autonomous Workflows</div>
+      <div class="legend-item"><span class="dot" style="background:#f59e0b"></span> Governance & Guardrails</div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('aiCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Pillars / components representing Enterprise AI in 2026
+    const nodes = [
+      {
+        id: 'agents',
+        title: 'Multi-Agent Mesh',
+        category: 'Agentic Orchestration',
+        color: '#38bdf8',
+        x: 180,
+        y: 140,
+        w: 220,
+        h: 110,
+        items: ['Specialized Sub-Agents', 'Self-Healing Workflows', 'Cross-Dept Coordination']
+      },
+      {
+        id: 'data',
+        title: 'Real-time Vector & RAG Mesh',
+        category: 'Enterprise Data Mesh',
+        color: '#a855f7',
+        x: 560,
+        y: 140,
+        w: 220,
+        h: 110,
+        items: ['Zero-Copy Enterprise RAG', 'Hybrid Knowledge Graphs', 'Continuous Fine-Tuning']
+      },
+      {
+        id: 'governance',
+        title: 'Governance & Alignment',
+        category: 'Governance & Guardrails',
+        color: '#f59e0b',
+        x: 180,
+        y: 330,
+        w: 220,
+        h: 110,
+        items: ['Deterministic Guardrails', 'Real-time Audit Trails', 'EU AI Act / ISO 42001 Compliance']
+      },
+      {
+        id: 'ops',
+        title: 'Autonomous Enterprise Ops',
+        category: 'Autonomous Workflows',
+        color: '#10b981',
+        x: 560,
+        y: 330,
+        w: 220,
+        h: 110,
+        items: ['AI-Driven IT & DevOps', 'Automated Supply Chains', 'Hyper-Personalized CX']
+      }
+    ];
+
+    const centerHub = {
+      title: 'ENTERPRISE AI 2026',
+      sub: 'Core Operational Layer',
+      x: 480,
+      y: 290,
+      r: 65
+    };
+
+    let time = 0;
+
+    function draw() {
+      time += 0.02;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw background grid lines
+      ctx.strokeStyle = '#1e293b';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < canvas.width; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < canvas.height; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // Draw connection lines to center hub
+      nodes.forEach((n, idx) => {
+        const nx = n.x + n.w / 2;
+        const ny = n.y + n.h / 2;
+
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([6, 6]);
+        ctx.beginPath();
+        ctx.moveTo(centerHub.x, centerHub.y);
+        ctx.lineTo(nx, ny);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Animated pulse particles moving along lines
+        const progress = ((time + idx * 0.25) % 1);
+        const px = centerHub.x + (nx - centerHub.x) * progress;
+        const py = centerHub.y + (ny - centerHub.y) * progress;
+        ctx.fillStyle = n.color;
+        ctx.beginPath();
+        ctx.arc(px, py, 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Draw Central Hub
+      ctx.save();
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = '#0284c7';
+      const gradient = ctx.createRadialGradient(centerHub.x, centerHub.y, 10, centerHub.x, centerHub.y, centerHub.r);
+      gradient.addColorStop(0, '#0369a1');
+      gradient.addColorStop(1, '#0f172a');
+      ctx.fillStyle = gradient;
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(centerHub.x, centerHub.y, centerHub.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(centerHub.title, centerHub.x, centerHub.y - 6);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '10px sans-serif';
+      ctx.fillText(centerHub.sub, centerHub.x, centerHub.y + 12);
+
+      // Draw Pillar Cards
+      nodes.forEach(n => {
+        ctx.save();
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = 'rgba(0,0,0,0.5)';
+        ctx.fillStyle = '#1e293b';
+        ctx.strokeStyle = n.color;
+        ctx.lineWidth = 2;
+
+        // Card round rect
+        const radius = 8;
+        ctx.beginPath();
+        ctx.moveTo(n.x + radius, n.y);
+        ctx.lineTo(n.x + n.w - radius, n.y);
+        ctx.quadraticCurveTo(n.x + n.w, n.y, n.x + n.w, n.y + radius);
+        ctx.lineTo(n.x + n.w, n.y + n.h - radius);
+        ctx.quadraticCurveTo(n.x + n.w, n.y + n.h, n.x + n.w - radius, n.y + n.h);
+        ctx.lineTo(n.x + radius, n.y + n.h);
+        ctx.quadraticCurveTo(n.x, n.y + n.h, n.x, n.y + n.h - radius);
+        ctx.lineTo(n.x, n.y + radius);
+        ctx.quadraticCurveTo(n.x, n.y, n.x + radius, n.y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+
+        // Card Header
+        ctx.fillStyle = n.color;
+        ctx.font = 'bold 14px sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(n.title, n.x + 14, n.y + 26);
+
+        // Card Category badge
+        ctx.fillStyle = '#64748b';
+        ctx.font = '10px sans-serif';
+        ctx.fillText(n.category.toUpperCase(), n.x + 14, n.y + 42);
+
+        // Card Bullets
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '11px sans-serif';
+        n.items.forEach((item, i) => {
+          ctx.beginPath();
+          ctx.arc(n.x + 18, n.y + 60 + i * 16, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = n.color;
+          ctx.fill();
+
+          ctx.fillStyle = '#e2e8f0';
+          ctx.fillText(item, n.x + 28, n.y + 64 + i * 16);
+        });
+      });
+
+      // Bottom banner / stat
+      ctx.fillStyle = '#475569';
+      ctx.font = '12px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Key 2026 Trend: Shift from standalone GenAI assistants to autonomous, multi-agent enterprise networks.', canvas.width / 2, canvas.height - 24);
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+</body>
+</html>
